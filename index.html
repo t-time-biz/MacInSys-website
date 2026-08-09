@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacinSys Inc. — Consulting | Solutions | Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue:#1a6fc4;
+    --blue-dark:#0f4d8a;
+    --blue-light:#e8f1fb;
+    --accent:#f5a623;
+    --text:#1c2b3a;
+    --muted:#6b7c8f;
+    --border:#e2eaf3;
+    --white:#ffffff;
+    --bg:#f7fafd;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"Poppins",sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+
+  /* ── TOP BAR ── */
+  .topbar{
+    background:var(--blue-dark);padding:.55rem 5%;
+    display:flex;align-items:center;justify-content:flex-end;gap:2rem;
+  }
+  .topbar span{
+    font-size:.75rem;color:rgba(255,255,255,.75);
+    display:flex;align-items:center;gap:.4rem;
+  }
+  .topbar a{color:rgba(255,255,255,.75);text-decoration:none;}
+  .topbar a:hover{color:var(--white);}
+
+  /* ── NAV ── */
+  nav{
+    background:var(--white);padding:0 5%;
+    display:flex;align-items:center;justify-content:space-between;
+    box-shadow:0 2px 16px rgba(0,0,0,.07);
+    position:sticky;top:0;z-index:500;
+    height:80px;
+  }
+  .nav-logo{height:80px;width:auto;padding:0;display:block;}
+  .nav-links{display:flex;list-style:none;gap:0;}
+  .nav-links a{
+    text-decoration:none;font-size:.83rem;font-weight:500;color:var(--text);
+    padding:1.4rem 1.1rem;display:block;transition:color .2s;position:relative;
+    letter-spacing:.01em;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;bottom:0;left:1.1rem;right:1.1rem;height:3px;
+    background:var(--blue);transform:scaleX(0);transition:transform .2s;border-radius:2px 2px 0 0;
+  }
+  .nav-links a:hover{color:var(--blue);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-cta{
+    font-size:.82rem;font-weight:600;text-decoration:none;color:var(--white);
+    background:var(--blue);padding:.65rem 1.6rem;border-radius:4px;
+    transition:background .2s,transform .2s;white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px);}
+
+  /* ── HERO SLIDER ── */
+  .hero{position:relative;overflow:hidden;height:580px;}
+  .slides{display:flex;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1);}
+  .slide{
+    min-width:100%;height:100%;position:relative;
+    display:flex;align-items:center;
+    background:linear-gradient(105deg,var(--blue-dark) 0%,var(--blue) 60%,#2a8fd4 100%);
+    flex-shrink:0;
+  }
+  .slide:nth-child(2){background:linear-gradient(105deg,#0a3a6e 0%,#1a5fa0 60%,#1a8fc4 100%);}
+  .slide:nth-child(3){background:linear-gradient(105deg,#0d2f5a 0%,#16548e 60%,#1e7ab8 100%);}
+
+  /* geometric decoration */
+  .slide::before{
+    content:"";position:absolute;right:-60px;top:-60px;
+    width:500px;height:500px;border-radius:50%;
+    background:rgba(255,255,255,.05);pointer-events:none;
+  }
+  .slide::after{
+    content:"";position:absolute;right:80px;bottom:-80px;
+    width:300px;height:300px;border-radius:50%;
+    background:rgba(255,255,255,.04);pointer-events:none;
+  }
+  /* diagonal stripe */
+  .slide-stripe{
+    position:absolute;right:0;top:0;bottom:0;width:42%;
+    background:rgba(255,255,255,.04);
+    clip-path:polygon(15% 0,100% 0,100% 100%,0% 100%);
+  }
+
+  .slide-content{
+    position:relative;z-index:2;padding:0 5%;max-width:700px;
+  }
+  .slide-tag{
+    display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);
+    font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    padding:.3rem .9rem;border-radius:100px;margin-bottom:1.2rem;
+    border:1px solid rgba(255,255,255,.2);
+  }
+  .slide-content h1{
+    font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:var(--white);
+    line-height:1.15;margin-bottom:1rem;
+  }
+  .slide-content h1 em{font-style:normal;color:#7dd3fc;}
+  .slide-content p{
+    font-size:1rem;color:rgba(255,255,255,.8);line-height:1.7;
+    font-weight:300;max-width:540px;margin-bottom:2rem;
+  }
+  .slide-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn-white{
+    font-size:.83rem;font-weight:700;text-decoration:none;
+    color:var(--blue-dark);background:var(--white);
+    padding:.8rem 2rem;border-radius:4px;
+    transition:transform .2s,box-shadow .2s;display:inline-block;
+  }
+  .btn-white:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15);}
+  .btn-outline-white{
+    font-size:.83rem;font-weight:700;text-decoration:none;
+    color:var(--white);background:transparent;
+    border:2px solid rgba(255,255,255,.5);
+    padding:.78rem 2rem;border-radius:4px;
+    transition:all .2s;display:inline-block;
+  }
+  .btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.1);}
+
+  /* slider controls */
+  .slider-dots{
+    position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
+    display:flex;gap:.6rem;z-index:10;
+  }
+  .dot{
+    width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);
+    cursor:pointer;transition:background .2s,transform .2s;border:none;padding:0;
+  }
+  .dot.active{background:var(--white);transform:scale(1.3);}
+  .slider-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+    color:var(--white);width:44px;height:44px;border-radius:50%;cursor:pointer;
+    font-size:1.1rem;z-index:10;transition:background .2s;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .slider-arrow:hover{background:rgba(255,255,255,.28);}
+  .arr-prev{left:2%;}
+  .arr-next{right:2%;}
+
+  /* ── ABOUT STRIP ── */
+  .about-strip{
+    background:var(--white);padding:3.5rem 5%;
+    display:flex;align-items:center;gap:3rem;
+    border-bottom:1px solid var(--border);
+    max-width:1300px;margin:0 auto;
+  }
+  .about-img{width:120px;height:120px;object-fit:cover;border-radius:8px;flex-shrink:0;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+  .about-text h2{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;}
+  .about-text p{font-size:.88rem;color:var(--muted);line-height:1.7;font-weight:300;}
+
+  /* ── SECTION COMMONS ── */
+  .section{padding:80px 5%;}
+  .si{max-width:1300px;margin:0 auto;}
+  .section-head{text-align:center;margin-bottom:3rem;}
+  .section-tag{
+    display:inline-block;background:var(--blue-light);color:var(--blue);
+    font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:.28rem .9rem;border-radius:100px;margin-bottom:.7rem;
+  }
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--text);line-height:1.2;}
+  .section-head h2 span{color:var(--blue);}
+  .section-head p{font-size:.92rem;color:var(--muted);max-width:560px;margin:.7rem auto 0;line-height:1.7;font-weight:300;}
+  .divider{width:50px;height:3px;background:var(--blue);border-radius:2px;margin:.8rem auto 0;}
+
+  /* ── SERVICES ── */
+  .services-bg{background:var(--bg);}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .svc-card{
+    background:var(--white);border-radius:8px;padding:2.2rem;
+    border:1px solid var(--border);
+    transition:transform .3s,box-shadow .3s,border-color .3s;
+    position:relative;overflow:hidden;
+  }
+  .svc-card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--blue),#2a8fd4);
+    transform:scaleX(0);transform-origin:left;transition:transform .3s;
+  }
+  .svc-card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(26,111,196,.1);border-color:rgba(26,111,196,.2);}
+  .svc-card:hover::before{transform:scaleX(1);}
+  .svc-icon{
+    width:52px;height:52px;border-radius:10px;background:var(--blue-light);
+    display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+    margin-bottom:1.2rem;
+  }
+  .svc-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.6rem;}
+  .svc-card p{font-size:.84rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1.2rem;}
+  .svc-link{
+    font-size:.78rem;font-weight:600;color:var(--blue);text-decoration:none;
+    display:inline-flex;align-items:center;gap:.4rem;transition:gap .2s;
+  }
+  .svc-link:hover{gap:.7rem;}
+
+  /* ── STATS ── */
+  .stats-section{
+    background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 100%);
+    padding:60px 5%;
+  }
+  .stats-inner{max-width:1300px;margin:0 auto;}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+  .stat-num{font-size:3rem;font-weight:800;color:var(--white);line-height:1;margin-bottom:.3rem;}
+  .stat-label{font-size:.8rem;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.1em;font-weight:500;}
+
+  /* ── ABOUT FULL ── */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+  .about-visual{
+    background:var(--blue-light);border-radius:12px;
+    padding:3rem;display:flex;flex-direction:column;align-items:center;
+    gap:1.5rem;position:relative;overflow:hidden;
+  }
+  .about-visual::after{
+    content:"";position:absolute;bottom:-40px;right:-40px;
+    width:200px;height:200px;border-radius:50%;background:rgba(26,111,196,.08);
+  }
+  .about-logo{width:85%;max-width:300px;filter:drop-shadow(0 4px 16px rgba(26,111,196,.25));}
+  .about-tagline{
+    font-size:.82rem;font-weight:600;color:var(--blue);
+    text-transform:uppercase;letter-spacing:.1em;text-align:center;
+  }
+  .milestone-row{
+    display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;
+  }
+  .milestone{
+    background:var(--white);border-radius:8px;padding:1.2rem;text-align:center;
+    border:1px solid var(--border);
+  }
+  .milestone-num{font-size:1.8rem;font-weight:800;color:var(--blue);line-height:1;}
+  .milestone-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:.2rem;}
+  .about-text-col h2{font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:800;line-height:1.25;margin-bottom:1.2rem;}
+  .about-text-col h2 span{color:var(--blue);}
+  .about-text-col p{font-size:.9rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem;}
+  .about-text-col p:last-of-type{margin-bottom:1.5rem;}
+  .check-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;}
+  .check-list li{
+    display:flex;align-items:center;gap:.7rem;
+    font-size:.87rem;color:var(--text);font-weight:500;
+  }
+  .check-list li::before{
+    content:"✓";width:20px;height:20px;border-radius:50%;background:var(--blue);
+    color:var(--white);display:flex;align-items:center;justify-content:center;
+    font-size:.65rem;font-weight:700;flex-shrink:0;
+  }
+
+  /* ── CERTIFICATION ── */
+  .cert-bar{
+    background:var(--blue-light);border:1px solid rgba(26,111,196,.15);
+    border-radius:8px;padding:1.5rem 2rem;
+    display:flex;align-items:center;gap:1.2rem;margin-top:2rem;
+  }
+  .cert-bar-icon{font-size:2rem;flex-shrink:0;}
+  .cert-bar-text{font-size:.88rem;color:var(--text);line-height:1.5;}
+  .cert-bar-text strong{color:var(--blue);}
+
+  /* ── CLIENTS ── */
+  .clients-bg{background:var(--bg);}
+  .clients-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--border);border:1px solid var(--border);
+    border-radius:8px;overflow:hidden;margin-top:3rem;
+  }
+  .client-cell{
+    background:var(--white);padding:2.5rem 1.5rem;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .2s;
+  }
+  .client-cell:hover{background:var(--blue-light);}
+  .client-name{
+    font-size:1.1rem;font-weight:700;color:#b0bec5;letter-spacing:.06em;
+    text-transform:uppercase;transition:color .2s;
+  }
+  .client-cell:hover .client-name{color:var(--blue);}
+
+  /* ── CONTACT ── */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start;}
+  .contact-info-box{background:var(--blue-dark);border-radius:8px;padding:2.5rem;color:var(--white);}
+  .contact-info-box h3{font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;}
+  .ci-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;}
+  .ci-icon{
+    width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,.12);
+    display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;
+  }
+  .ci-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.55);margin-bottom:.2rem;font-weight:600;}
+  .ci-val{font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.5;}
+  .ci-val a{color:rgba(255,255,255,.85);text-decoration:none;}
+  .ci-val a:hover{color:var(--white);}
+
+  .form-box{background:var(--white);border-radius:8px;padding:2.5rem;box-shadow:0 4px 24px rgba(0,0,0,.06);border:1px solid var(--border);}
+  .form-box h3{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--text);}
+  .cf{display:flex;flex-direction:column;gap:.9rem;}
+  .fr{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+  .ff label{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:.35rem;}
+  .ff input,.ff textarea,.ff select{
+    width:100%;background:var(--bg);border:1px solid var(--border);
+    border-radius:6px;padding:.75rem 1rem;font-family:"Poppins",sans-serif;
+    font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s;resize:none;
+  }
+  .ff input:focus,.ff textarea:focus,.ff select:focus{border-color:var(--blue);background:var(--white);}
+  .ff input::placeholder,.ff textarea::placeholder{color:#b0bec5;}
+  .ff select{color:var(--text);}
+  .btn-blue{
+    font-size:.85rem;font-weight:700;text-decoration:none;color:var(--white);
+    background:var(--blue);padding:.85rem 2.2rem;border-radius:6px;
+    border:none;cursor:pointer;transition:background .2s,transform .2s;
+    font-family:"Poppins",sans-serif;display:inline-block;
+  }
+  .btn-blue:hover{background:var(--blue-dark);transform:translateY(-1px);}
+
+  /* ── FOOTER ── */
+  .footer-main{
+    background:#0c1a2e;padding:60px 5% 40px;
+  }
+  .footer-inner{max-width:1300px;margin:0 auto;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem;margin-bottom:3rem;}
+  .footer-logo{height:48px;width:auto;margin-bottom:1.2rem;filter:brightness(2) contrast(.8);}
+  .footer-about{font-size:.83rem;color:rgba(255,255,255,.5);line-height:1.8;font-weight:300;}
+  .footer-heading{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:1.1rem;}
+  .footer-links{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+  .footer-links a{font-size:.83rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s;}
+  .footer-links a:hover{color:var(--white);}
+  .footer-contact-item{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.8rem;}
+  .footer-contact-icon{font-size:.9rem;margin-top:.1rem;flex-shrink:0;}
+  .footer-contact-text{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.5;}
+  .footer-contact-text a{color:rgba(255,255,255,.45);text-decoration:none;}
+  .footer-contact-text a:hover{color:var(--white);}
+  .newsletter-form{display:flex;gap:.5rem;margin-top:.5rem;}
+  .newsletter-form input{
+    flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+    border-radius:4px;padding:.65rem .9rem;font-family:"Poppins",sans-serif;
+    font-size:.82rem;color:var(--white);outline:none;
+  }
+  .newsletter-form input::placeholder{color:rgba(255,255,255,.3);}
+  .newsletter-form button{
+    background:var(--blue);border:none;color:var(--white);padding:.65rem 1.1rem;
+    border-radius:4px;cursor:pointer;font-family:"Poppins",sans-serif;font-size:.8rem;font-weight:600;
+    transition:background .2s;
+  }
+  .newsletter-form button:hover{background:var(--blue-dark);}
+  .footer-bottom{
+    background:#08111e;padding:1rem 5%;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+    max-width:100%;
+  }
+  .footer-bottom p{font-size:.75rem;color:rgba(255,255,255,.35);}
+  .footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none;}
+  .footer-bottom a:hover{color:rgba(255,255,255,.7);}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:1024px){
+    .svc-grid{grid-template-columns:1fr 1fr;}
+    .about-grid{grid-template-columns:1fr;gap:3rem;}
+    .contact-grid{grid-template-columns:1fr;gap:2.5rem;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+  }
+  @media(max-width:768px){
+    nav .nav-links{display:none;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .clients-grid{grid-template-columns:1fr 1fr;}
+    .hero{height:auto;min-height:480px;}
+    .slide-content h1{font-size:1.8rem;}
+    .fr{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:480px){
+    .svc-grid{grid-template-columns:1fr;}
+    .milestone-row{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>📍 103 Regents Court, Malvern, PA</span>
+  <span>✉ <a href="mailto:contactme@macinsysinc.com">contactme@macinsysinc.com</a></span>
+  <span>📞 <a href="tel:4842220087">484 222 0087</a></span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <svg class="nav-logo" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg" style="height:80px;width:auto;">
+      <text x="0" y="45" font-family="'Poppins',sans-serif" font-size="34" font-weight="700" fill="#1a6fc4">Macin<tspan fill="#0f4d8a">Sys</tspan></text>
+      <text x="2" y="66" font-family="'Poppins',sans-serif" font-size="10" font-weight="500" letter-spacing="1" fill="#6b7c8f">CONSULTING | SOLUTIONS | SERVICES</text>
+    </svg>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get In Touch</a>
+</nav>
+
+<!-- HERO SLIDER -->
+<div class="hero" id="heroSlider">
+  <div class="slides" id="slides">
+
+    <div class="slide">
+      <div class="slide-stripe"></div>
+      <div class="slide-content">
+        <div class="slide-tag">Est. 2022 · Malvern, PA</div>
+        <h1>Where <em>Innovation</em> &amp; Technology Come Together.</h1>
+        <p>MacinSys delivers cutting-edge technology solutions, innovative product development, and responsive technical support to power your business forward.</p>
+        <div class="slide-btns">
+          <a href="#services" class="btn-white">Our Services</a>
+          <a href="#contact" class="btn-outline-white">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-stripe"></div>
+      <div class="slide-content">
+        <div class="slide-tag">PMI Certified · Project Managers</div>
+        <h1>Effective &amp; <em>Efficient</em> Business Solutions</h1>
+        <p>Technology solutions built around your business. Our PMI certified project managers bring structure, accountability, and expertise to every engagement.</p>
+        <div class="slide-btns">
+          <a href="#services" class="btn-white">Learn More</a>
+          <a href="#contact" class="btn-outline-white">Talk to Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-stripe"></div>
+      <div class="slide-content">
+        <div class="slide-tag">Consulting · Solutions · Services</div>
+        <h1>Intelligent <em>Digital</em> Transformation</h1>
+        <p>Upgrade to services that keep pace with the ever-changing world of technology. From concept to deployment, MacinSys is your end-to-end technology partner.</p>
+        <div class="slide-btns">
+          <a href="#services" class="btn-white">Explore More</a>
+          <a href="#contact" class="btn-outline-white">Get Started</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="slider-arrow arr-prev" id="prev">&#8592;</button>
+  <button class="slider-arrow arr-next" id="next">&#8594;</button>
+  <div class="slider-dots" id="dots">
+    <button class="dot active"></button>
+    <button class="dot"></button>
+    <button class="dot"></button>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-grid">
+      <div><div class="stat-num">2022</div><div class="stat-label">Year Founded</div></div>
+      <div><div class="stat-num">3+</div><div class="stat-label">Core Service Areas</div></div>
+      <div><div class="stat-num">4+</div><div class="stat-label">Trusted Client Partners</div></div>
+      <div><div class="stat-num">24/7</div><div class="stat-label">Support Available</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section services-bg">
+  <div class="si">
+    <div class="section-head">
+      <div class="section-tag">What We Do</div>
+      <h2>Services We <span>Offer</span></h2>
+      <div class="divider"></div>
+      <p>From strategy through support, MacinSys delivers across the full technology lifecycle.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-icon">⚙️</div>
+        <h3>Technology Solutions</h3>
+        <p>End-to-end technology consulting and implementation tailored to your business. We identify, design, and deploy the right tech stack to drive efficiency and growth.</p>
+        <a href="#contact" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">💡</div>
+        <h3>Innovative Product Development</h3>
+        <p>From concept to launch, we build innovative products that solve real business problems. Agile, collaborative, and focused on measurable results.</p>
+        <a href="#contact" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🛠️</div>
+        <h3>Technical Support</h3>
+        <p>Reliable, responsive support to keep your systems running at peak performance. Available to troubleshoot, maintain, and optimize your technology infrastructure.</p>
+        <a href="#contact" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🎯</div>
+        <h3>IT Consulting</h3>
+        <p>Strategic guidance from experienced consultants. We align your IT strategy with your broader organizational goals for maximum business impact.</p>
+        <a href="#contact" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📋</div>
+        <h3>Project Management</h3>
+        <p>PMI certified project managers who deliver on time and on budget — bringing structure, accountability, and transparency to every engagement.</p>
+        <a href="#contact" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔗</div>
+        <h3>Systems Integration</h3>
+        <p>Seamlessly connecting your platforms, tools, and workflows. We bridge the gaps between systems to create a unified, high-performance technology environment.</p>
+        <a href="#contact" class="svc-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section" style="background:var(--white)">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-visual">
+        <svg class="about-logo" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg" style="width:85%;max-width:300px;filter:drop-shadow(0 4px 16px rgba(26,111,196,.25));">
+  <text x="0" y="45" font-family="'Poppins',sans-serif" font-size="34" font-weight="700" fill="#1a6fc4">Macin<tspan fill="#0f4d8a">Sys</tspan></text>
+  <text x="2" y="66" font-family="'Poppins',sans-serif" font-size="10" font-weight="500" letter-spacing="1" fill="#6b7c8f">CONSULTING | SOLUTIONS | SERVICES</text>
+</svg>
+        <div class="about-tagline">Consulting · Solutions · Services</div>
+        <div class="milestone-row">
+          <div class="milestone"><div class="milestone-num">2022</div><div class="milestone-label">Founded</div></div>
+          <div class="milestone"><div class="milestone-num">4+</div><div class="milestone-label">Clients</div></div>
+          <div class="milestone"><div class="milestone-num">PMI</div><div class="milestone-label">Certified PMs</div></div>
+          <div class="milestone"><div class="milestone-num">24/7</div><div class="milestone-label">Support</div></div>
+        </div>
+      </div>
+      <div class="about-text-col">
+        <h2>Trusted by Clients.<br><span>Driven by Innovation.</span></h2>
+        <p>MacinSys Inc. is a professional technology company offering comprehensive IT solutions and services. We are recognized for our expertise in delivering cutting-edge, forward-thinking solutions across industries.</p>
+        <p>Our team of experienced professionals brings the knowledge, methodology, and commitment needed to implement advanced technology solutions that deliver real business results.</p>
+        <ul class="check-list">
+          <li>PMI Certified Project Managers on every engagement</li>
+          <li>End-to-end technology lifecycle coverage</li>
+          <li>Cross-industry expertise and proven delivery</li>
+          <li>Responsive 24/7 technical support</li>
+        </ul>
+        <a href="#contact" class="btn-blue">Get In Touch</a>
+        <div class="cert-bar">
+          <div class="cert-bar-icon">🏆</div>
+          <div class="cert-bar-text"><strong>PMI Certified Project Managers</strong> — Every MacinSys project is led by Project Management Institute certified professionals, ensuring industry-standard rigor and accountability.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients" class="section clients-bg">
+  <div class="si">
+    <div class="section-head">
+      <div class="section-tag">Trusted By</div>
+      <h2>Our <span>Clients</span></h2>
+      <div class="divider"></div>
+      <p>MacinSys is proud to work with industry-leading organizations across sectors.</p>
+    </div>
+    <div class="clients-grid">
+      <div class="client-cell"><div class="client-name">Loves</div></div>
+      <div class="client-cell"><div class="client-name">M10tek</div></div>
+      <div class="client-cell"><div class="client-name">SAP America</div></div>
+      <div class="client-cell"><div class="client-name">Bottech</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="background:var(--white)">
+  <div class="si">
+    <div class="section-head">
+      <div class="section-tag">Reach Out</div>
+      <h2>Contact <span>MacinSys</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <a href="mailto:contactme@macinsysinc.com" class="btn-blue" style="text-decoration:none;display:inline-block;font-size:1rem;padding:1rem 2.5rem;">Reach Out</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-main">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <svg class="footer-logo" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg" style="height:48px;width:auto;">
+  <text x="0" y="45" font-family="'Poppins',sans-serif" font-size="34" font-weight="700" fill="#ffffff">Macin<tspan fill="rgba(255,255,255,.7)">Sys</tspan></text>
+  <text x="2" y="66" font-family="'Poppins',sans-serif" font-size="10" font-weight="500" letter-spacing="1" fill="rgba(255,255,255,.5)">CONSULTING | SOLUTIONS | SERVICES</text>
+</svg>
+        <p class="footer-about">MacinSys Inc. is a professional technology company providing comprehensive IT solutions, innovative product development, and responsive technical support. We are committed to delivering results that matter.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#clients">Clients</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Technology Solutions</a></li>
+          <li><a href="#services">Product Development</a></li>
+          <li><a href="#services">Technical Support</a></li>
+          <li><a href="#services">IT Consulting</a></li>
+          <li><a href="#services">Project Management</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📍</span>
+          <div class="footer-contact-text">103 Regents Court, Malvern, PA</div>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">✉</span>
+          <div class="footer-contact-text"><a href="mailto:contactme@macinsysinc.com">contactme@macinsysinc.com</a></div>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📞</span>
+          <div class="footer-contact-text"><a href="tel:4842220087">484 222 0087</a></div>
+        </div>
+        <div class="footer-heading" style="margin-top:1.5rem">Newsletter</div>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button>Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer-bottom">
+  <p>Copyright ©2025 MacinSys Inc. All Rights Reserved.</p>
+  <p><a href="#">Privacy Policy</a></p>
+</div>
+
+<script>
+  // Slider
+  const slides = document.getElementById("slides");
+  const dots = document.querySelectorAll(".dot");
+  let cur = 0, total = 3, timer;
+
+  function goTo(n) {
+    cur = (n + total) % total;
+    slides.style.transform = `translateX(-${cur * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle("active", i === cur));
+  }
+
+  function next() { goTo(cur + 1); }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, 5000);
+  }
+
+  dots.forEach((d, i) => {
+    d.addEventListener("click", () => { goTo(i); startTimer(); });
+  });
+
+  goTo(0);
+  startTimer();
+</script>
